@@ -1,19 +1,29 @@
 const app=Vue.createApp({
     data(){
         return {
-            goals:[],
-            enteredGoalValue:''
+          playerHealth:100,
+          monsterHealth:100
         }
     },    methods:{
-        addGoal(){
-            this.goals.push(this.enteredGoalValue);
-            this.enteredGoalValue='';
-         
+        attackMonster(){
+
+            const randomDamage=Math.floor(Math.random()*10)+1;
+            this.monsterHealth-=randomDamage;
+
+            this.attackPlayer();
+            
+
+
+
+        },
+
+        attackPlayer(){
+            const randomDamage=Math.floor(Math.random()*12)+1;
+            this.playerHealth-=randomDamage;
+            
         }
-        ,
-        removeGoal(index){
-            this.goals.splice(index,1);
-        }
-}})
+        
+}
+})
 
 app.mount('#game');
