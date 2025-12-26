@@ -19,28 +19,32 @@
   <section id="monster" class="container">
     <h2>Monster Health</h2>
     <div class="healthbar">
-        <div class="healthbar_value">
+        <div class="healthbar__value" v-bind:style="{ width: monsterHealth + '%' }">
         </div>
     </div>
   </section>
 
   <section id="player" class="container">
-    <h2>Yout health</h2>
+    <h2>Your health</h2>
      <div class="healthbar">
-        <div class="healthbar_value">
+        <div class="healthbar__value" v-bind:style="{ width: playerHealth + '%' }">
         </div>
-    </div>
+    </div> 
   </section>
 
   <section id="controls">
-    <button>ATTACK</button>
-    <button>SPECIAL ATTACK</button>
-    <button>HEAL</button>
-    <button>SURRENDER</button>
+    <button @click="attackMonster">ATTACK</button>
+    <button :disabled="round%3!==0" @click="specialAttack">SPECIAL ATTACK</button>
+    <button @click="healPlayer">HEAL</button>
+    <button @click="surrender">SURRENDER</button>
   </section>
   <section id="log" class="container">
     <h2>Battle log</h2>
-    <ul></ul>
+    <ul>
+      <li v-for="logMessage in logMessages" :key="logMessage.actionBy">
+        {{ logMessage.actionBy }} {{ logMessage.actionType }} for {{ logMessage.actionValue }}
+      </li>
+    </ul>
   </section>
 
 </div>
